@@ -54,7 +54,7 @@ pub fn generateBindingsModule(b: *std.Build, options: GeneratorOptions) *std.Bui
 
 pub fn generateBindingsSourceFile(b: *std.Build, options: GeneratorOptions) std.Build.LazyPath {
     const zigglgen_dep = b.dependencyFromBuildZig(@This(), .{
-        .target = b.graph.host,
+        .target = .{},
         .optimize = std.builtin.OptimizeMode.Debug,
     });
     const zigglgen_exe = zigglgen_dep.artifact("zigglgen");
