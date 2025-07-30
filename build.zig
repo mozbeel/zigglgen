@@ -3,8 +3,10 @@
 
 const std = @import("std");
 
+var target: std.Build.ResolvedTarget = undefined;
+
 pub fn build(b: *std.Build) void {
-    const target = b.standardTargetOptions(.{});
+    target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
     const zigglgen_exe = b.addExecutable(.{
@@ -54,7 +56,7 @@ pub fn generateBindingsModule(b: *std.Build, options: GeneratorOptions) *std.Bui
 
 pub fn generateBindingsSourceFile(b: *std.Build, options: GeneratorOptions) std.Build.LazyPath {
     const zigglgen_dep = b.dependencyFromBuildZig(@This(), .{
-        .target = .{},
+        .target = target,
         .optimize = std.builtin.OptimizeMode.Debug,
     });
     const zigglgen_exe = zigglgen_dep.artifact("zigglgen");
