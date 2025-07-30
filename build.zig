@@ -47,9 +47,9 @@ pub fn build(b: *std.Build) void {
 
 pub const GeneratorOptions = @import("GeneratorOptions.zig");
 
-pub fn generateBindingsModule(b: *std.Build, options: GeneratorOptions) *std.Build.Module {
+pub fn generateBindingsModule(b: *std.Build, options: GeneratorOptions, target: std.Build.ResolvedTarget) *std.Build.Module {
     return b.createModule(.{
-        .root_source_file = generateBindingsSourceFile(b, options),
+        .root_source_file = generateBindingsSourceFile(b, options, target),
     });
 }
 
